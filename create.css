@@ -45,6 +45,13 @@ body{
 .my-info{
     font-weight: bold;
 }
+.write-content-title {
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(207, 206, 206);
+    border-top: 1px solid rgb(207, 206, 206);
+    font-size: 15px;
+}
 .write-content-box {
     width: 500px;
     height: 200px;
@@ -52,7 +59,8 @@ body{
     border: none;
     font-size: 20px;
 }
-.write-content-box:focus{
+.write-content-box:focus,
+.write-content-title:focus{
     outline: none;
 }
 
