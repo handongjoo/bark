@@ -11,22 +11,12 @@
           display: none;
         }
     
-        /* 사용자 정의 버튼 스타일링 */
-        .custom-file-upload {
-          border: 1px solid #ccc;
-          display: inline-block;
-          padding: 6px 12px;
-          cursor: pointer;
-          color: #333;
-          background-color: #fff;
-          border-radius: 4px;
-        }
-    
         /* 미리보기 이미지 스타일링 */
         #image-preview {
           max-width: 100%;
           max-height: 200px;
           margin-top: 10px;
+          display: none;
         }
       </style>
 </head>
@@ -39,34 +29,32 @@
             <textarea class="write-content-box" placeholder="내이름님, 무슨 생각을 하고 계신가요?"></textarea>
 
             <img id="image-preview" src="#" alt="Image Preview">
-            <label for="file-upload" class="img-icon-box">
+            <label for="image-upload" class="img-icon-box">
                 이미지 업로드
               </label>
-              <input id="file-upload" type="file">
-            
-              <!-- 선택된 이미지 미리보기 -->
-              
+              <input id="image-upload" type="file">
             <button type="submit" class="submit-btn" disabled>게시</button>
         </form>
     </div>
     <script>
-        document.getElementById('file-upload').addEventListener('change', function(event) {
+        document.getElementById('image-upload').addEventListener('change', function(event) {
           var input = event.target;
           var reader = new FileReader();
-      
+    
           reader.onload = function() {
             var preview = document.getElementById('image-preview');
             preview.src = reader.result;
+            
+            // 이미지가 선택되면 style.display 속성 제거
+            preview.style.display = 'block';
           }
-      
-          // Set up the onload event for the image element
+    
           document.getElementById('image-preview').onload = function() {
-            // Update the preview once the image has loaded
             console.log('Image loaded');
           };
-      
+    
           reader.readAsDataURL(input.files[0]);
         });
-      </script>
+    </script>
 </body>
 </html>
