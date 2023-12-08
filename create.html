@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="create.css">
     <title>Bark</title>
+    <style>
+        /* 파일 입력 필드 숨기기 */
+        input[type="file"] {
+          display: none;
+        }
+    
+        /* 사용자 정의 버튼 스타일링 */
+        .custom-file-upload {
+          border: 1px solid #ccc;
+          display: inline-block;
+          padding: 6px 12px;
+          cursor: pointer;
+          color: #333;
+          background-color: #fff;
+          border-radius: 4px;
+        }
+    
+        /* 미리보기 이미지 스타일링 */
+        #image-preview {
+          max-width: 100%;
+          max-height: 200px;
+          margin-top: 10px;
+        }
+      </style>
 </head>
 <body>
     <div class="create-wrap">
@@ -13,9 +37,36 @@
             <div class="my-info">내이름</div>
             <input type="text" class="write-content-title" placeholder="제목을 입력하세요"/>
             <textarea class="write-content-box" placeholder="내이름님, 무슨 생각을 하고 계신가요?"></textarea>
-            <div class="img-icon-box">이미지 업로드</div>
+
+            <img id="image-preview" src="#" alt="Image Preview">
+            <label for="file-upload" class="img-icon-box">
+                이미지 업로드
+              </label>
+              <input id="file-upload" type="file">
+            
+              <!-- 선택된 이미지 미리보기 -->
+              
             <button type="submit" class="submit-btn" disabled>게시</button>
         </form>
     </div>
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function(event) {
+          var input = event.target;
+          var reader = new FileReader();
+      
+          reader.onload = function() {
+            var preview = document.getElementById('image-preview');
+            preview.src = reader.result;
+          }
+      
+          // Set up the onload event for the image element
+          document.getElementById('image-preview').onload = function() {
+            // Update the preview once the image has loaded
+            console.log('Image loaded');
+          };
+      
+          reader.readAsDataURL(input.files[0]);
+        });
+      </script>
 </body>
 </html>
